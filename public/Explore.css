@@ -1,0 +1,179 @@
+/* Global Reset */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url("star bg.jpg"); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 0;
+}
+
+/* Dark overlay to improve readability */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+/* Navbar */
+.navbar {
+    position: absolute;
+    background: transparent;
+}
+
+.navbar-logo {
+    width: 150px;
+    height: auto;
+}
+
+/* Hero section */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 0;
+    ;
+}
+
+/* Text on the left side */
+.content {
+    color: white;
+    max-width: 600px;
+}
+
+/* Image on the right side */
+.image img {
+    width: 2000px;
+    max-width: 100%;
+    height: auto;
+    .image img {
+    width: 600px; /* ← increase this as needed */
+    max-width: 100%;
+    height: auto;
+    margin-right: 50px; /* ← push the image to the right */
+    animation: fadeIn 3s ease, Float 3s ease infinite, spin 20s linear infinite, pulse 4s ease-in-out infinite;
+    animation-fill-mode: forwards;
+}
+
+    animation: fadeIn 3s ease, Float 3s ease infinite, spin 20s linear infinite, pulse 4s ease-in-out infinite;
+    animation-fill-mode: forwards;
+}
+
+/* Carousel (if used later) */
+.carousel-item {
+    position: relative;
+    height: 500px;
+}
+
+.carousel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+}
+
+.carousel-inner .carousel-item {
+    transition: transform 0.5s ease;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    z-index: 1;
+}
+
+.carousel- {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: black;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    z-index: 1;
+}
+
+/* Robot styles (if you use one) */
+.robot-container {
+    position: relative;
+    display: inline-block;
+    align-items: left;
+}
+
+.robot {
+    position: relative;
+    width: 500px;
+    transform-origin: right 10%;
+    animation: wave 1s ease-in-out infinite alternate;
+}
+
+.nav-item {
+    text-decoration: none;
+    font-family: fantasy;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes Float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes wave {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(15deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Light background container */
+.light {
+    height: 100vh;
+}
+
+/* Footer styling */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+/* Fade transition for fun fact */
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.4s ease-in;
+  }
+  
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+  }
+  

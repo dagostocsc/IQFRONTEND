@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.navbar {
+    position: absolute;
+    background: transparent;
+}
+
+.nav-item {
+    text-decoration: none;
+    font-family: fantasy;
+}
+
+body {
+    background: url("star bg.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.input-box {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border-radius: 40px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    font-size: 12px;
+    color: rgb(0, 0, 0);
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box::placeholder {
+    color: #fff;
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0);
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin: -15px 0 15px;
+}
+
+.remember-forgot label input {
+    accent-color: #fff;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    width: 100%; /* Ensures it takes full width */
+}
+
+.btn {
+    width: 50%; /* Same width as input fields */
+    height: 40px; /* Same height as input fields */
+    background-color: white !important; /* Force white background */
+    border: none;
+    outline: none;
+    border-radius: 50px; /* Same rounded shape as inputs */
+    font-size: 14px; /* Match input font size */
+    color: black !important; /* Ensure visible text */
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a soft shadow */
+}
+
+
+.register-link {
+    font-size: 12px; /* Match the font size */
+    color: white; /* Match text color */
+    text-align: center;
+    margin: 15px;
+}
+
+/* Ensure the "Register" link itself matches the Forgot Password link */
+.register-link a {
+    color: white;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* SCROLLING ANIMATION */
+.wrapper1 {
+    width: 90%;
+    max-width: 1536px;
+    margin-inline: auto;
+    position: relative;
+    height: 100px;
+    overflow: hidden;
+    mask-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 1) 20%,
+        rgba(0, 0, 0, 1) 80%,
+        rgba(0, 0, 0, 0)
+    );
+}
+
+@keyframes scrollLeft {
+    to {
+        left: -200px;
+    }
+}
+
+.item {
+    width: 100px;
+    height: 50px;
+    border-radius: 6px;
+    position: absolute;
+    left: max(calc(200px * 8), 100%);
+    animation-name: scrollLeft;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.item1
+{ 
+    animation-delay: calc(30s / 8 * (8 - 1) * -1);
+    box-shadow: #fff;
+}
+.item2
+{
+    animation-delay: calc(30s / 8 * (8 - 2) * -1);
+    box-shadow: #fff;
+}
+.item3
+{
+    animation-delay: calc(30s / 8 * (8 - 3) * -1);
+}
+.item4
+{
+    animation-delay: calc(30s / 8 * (8 - 4) * -1);
+}
+.item5
+{
+    animation-delay: calc(30s / 8 * (8 - 5) * -1);
+}
+
+/* Footer Styling */
+footer {
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+}

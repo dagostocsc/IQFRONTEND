@@ -1,0 +1,55 @@
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: black; /* Optional: ensures it's visible over video */
+}
+
+
+.navbar-nav .nav-link {
+  font-family: fantasy;
+  color: white !important;
+}
+
+      /* Video background */
+      .videoBG {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .videoBG video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      /* Padding to prevent overlap */
+      body {
+        padding-top: 100px;
+        margin: 0;
+      }
+
+      /* Footer */
+      footer {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  z-index: 1000;
+  margin-top: 50px;
+}
+
+
+      .dropdown-menu {
+        z-index: 1050;
+      }

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cosmic Destination</title>
+
+  <!-- External Libraries -->
+  <link rel="icon" href="ChatGPT Image Apr 15, 2025, 09_21_02 PM.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="PanelSearch.css" />
+  <link href="https://fonts.cdnfonts.com/css/ica-rubrik-black" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <img src="ChatGPT Image Apr 15, 2025, 09_21_02 PM.png" alt="logo" width="100" height="100" />
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="planets.html">HOME</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">EXPLORE</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="Explore.html">Explore</a></li>
+              <li><a class="dropdown-item" href="RESOURCES.html">Resources</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="JOURNEYTOTHECOSMOS.html">ABOUT</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="LOGIN_SIGNUP.html">LOG IN</a></li>
+          <li class="nav-item"><a class="nav-link disabled">WELCOME TRAVELER</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <div class="videoBG">
+    <video autoplay muted loop id="myVideo">
+      <source src="Solar System.mp4" type="video/mp4" />
+    </video>
+    <div class="background-overlay"></div>
+
+    <div class="banner">
+      <!-- 3D Rotating Slider -->
+      <div class="slider" style="--quantity: 10">
+        <div class="item glow-blue" style="--position: 1" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="Earth">
+          <div class="card-content">
+            <h3>Big Bang</h3>
+            <p>The beginning of time, matter, and the universe as we know it.</p>
+          </div>
+        </div>
+        <div class="item glow-purple" style="--position: 2" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="">
+        </div>
+        <div class="item glow-orange" style="--position: 3" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="">
+        </div>
+        <div class="item glow-blue" style="--position: 4" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="">
+        </div>
+        <div class="item glow-purple" style="--position: 5" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="">
+        </div>
+        <div class="item glow-orange" style="--position: 6" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="">
+        </div>
+        <div class="item glow-blue" style="--position: 7" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="">
+        </div>
+        <div class="item glow-purple" style="--position: 8" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="">
+        </div>
+        <div class="item glow-orange" style="--position: 9" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="">
+        </div>
+        <div class="item glow-blue" style="--position: 10" onclick="focusCard(this)">
+          <img src="TheBigBang.png" alt="">
+        </div>
+      </div>
+
+      <!-- Text Content -->
+      <div class="content">
+        <div class="author">
+          <h2>Welcome to the Cosmos</h2>
+          <p><strong>Traveler</strong></p>
+          <p>Choose your next destination</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- JavaScript -->
+  <script src="focusCard.js"></script>
+    <!-- FOOTER -->
+    <footer class="text-center text-white">
+      <p>&copy; 2025 StellarBase. All Rights Reserved.</p>
+      <p>Built by <strong>DEBORAH AGOSTO</strong></p>
+    </footer>
+</body>
+</html>

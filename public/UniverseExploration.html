@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ISS Tracker</title>
+
+  <!-- Cesium CSS -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.112/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+
+  <style>
+    html, body, #cesiumContainer {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div id="cesiumContainer"></div>
+
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.112/Build/Cesium/Cesium.js"></script>
+  <script>
+
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNjEwMDRhYy0xMjczLTRiMDgtYmFmOS01ZDAxZWY3YTg3ZGMiLCJpZCI6Mjk0NzYxLCJpYXQiOjE3NDQ4MzA5MjB9.wKXgE0VL3UNKfArQ85gR6Z983wkULZ5aP6FsPjI95r0';
+
+    // 🔭 Create the Cesium viewer
+    const viewer = new Cesium.Viewer('cesiumContainer', {
+      terrainProvider: Cesium.createWorldTerrain(),
+      baseLayerPicker: false,
+      animation: false,
+      timeline: false
+    });
+
+    // 🛰️ Optional: add ISS model or marker
+    const issEntity = viewer.entities.add({
+      name: "ISS (example position)",
+      position: Cesium.Cartesian3.fromDegrees(-74, 40, 400000),
+      model: {
+        uri: "https://raw.githubusercontent.com/typpo/spacekit-assets/main/models/iss.glb",
+        minimumPixelSize: 64
+      }
+    });
+
+    viewer.trackedEntity = issEntity;
+  </script>
+</body>
+</html>
