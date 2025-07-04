@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
-import api from "./api/axiosInstance"; 
+import api from "./api/axiosInstance";
 import HomePage from "./HomePage";
 import UsersList from "./UsersList";
 import SingleUser from "./SingleUser";
