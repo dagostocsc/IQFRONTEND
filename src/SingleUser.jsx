@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../api/axiosInstance";
+import api from "./api/axiosInstance";
 
 const SingleUser = ({ fetchAllUsers }) => {
   const { id } = useParams();
@@ -11,13 +11,18 @@ const SingleUser = ({ fetchAllUsers }) => {
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
+    if (!id) {
+      console.error("❌ No user ID provided.");
+      return;
+    }
+
     (async () => {
       try {
-        const res = await api.get(`/users/${id}`);
+        const res = await api.get(`/user/${id}`);
         setUser(res.data);
         setForm(res.data);
       } catch (err) {
-        console.error("Error loading user:", err);
+        console.error(`❌ Error loading user ${id}:`, err);
       }
     })();
   }, [id]);
@@ -29,18 +34,20 @@ const SingleUser = ({ fetchAllUsers }) => {
 
   const handleEditSave = async (e) => {
     e.preventDefault();
+
     if (!editing) {
       setEditing(true);
       return;
     }
+
     try {
-      const { data } = await api.patch(`/users/${id}`, form);
+      const { data } = await api.patch(`/user/${id}`, form);
       setUser(data);
       setForm(data);
       setEditing(false);
       fetchAllUsers();
     } catch (err) {
-      console.error("Error updating user:", err);
+      console.error(`❌ Error updating user ${id}:`, err);
     }
   };
 
@@ -51,12 +58,13 @@ const SingleUser = ({ fetchAllUsers }) => {
 
   const handleDelete = async () => {
     if (!window.confirm("Delete this user?")) return;
+
     try {
-      await api.delete(`/users/${id}`);
+      await api.delete(`/user/${id}`);
       fetchAllUsers();
       navigate("/users");
     } catch (err) {
-      console.error("Error deleting user:", err);
+      console.error(`❌ Error deleting user ${id}:`, err);
     }
   };
 
@@ -138,23 +146,23 @@ const SingleUser = ({ fetchAllUsers }) => {
           <button type="submit">{editing ? "Save" : "Edit"}</button>
 
           {editing && (
-            <button
-              type="button"
-              onClick={handleCancel}
-              style={{ marginLeft: 8 }}
-            >
-              Cancel
-            </button>
-          )}
+            <>
+              <button
+                type="button"
+                onClick={handleCancel}
+                style={{ marginLeft: 8 }}
+              >
+                Cancel
+              </button>
 
-          {editing && (
-            <button
-              type="button"
-              onClick={handleDelete}
-              style={{ marginLeft: 8, color: "red" }}
-            >
-              Delete User
-            </button>
+              <button
+                type="button"
+                onClick={handleDelete}
+                style={{ marginLeft: 8, color: "red" }}
+              >
+                Delete User
+              </button>
+            </>
           )}
 
           <button
