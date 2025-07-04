@@ -1,0 +1,85 @@
+/* Color palette:
+https://coolors.co/palette/ffd6ff-e7c6ff-c8b6ff-b8c0ff-bbd0ff
+FFD6FF
+E7C6FF
+C8B8FF
+B8C0FF
+BBD0FF */
+
+.HomePage {
+  font-family: sans-serif;
+  color: #333;
+  padding: 2rem;
+}
+
+.HomePage details {
+  border: 2px solid #E7C6FF;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  width: 1200px;
+  overflow: hidden;
+  background: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.HomePage summary {
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  font-weight: bold;
+  position: relative;
+}
+
+.user-stories summary {
+  background: #FFD6FF;
+  border-bottom: 1px solid #E7C6FF;
+}
+
+.user-stories ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.user-stories li {
+  list-style: none;
+  margin: 0;
+  padding-left: none;
+}
+
+.all-campuses-and-students summary {
+  background: #E7C6FF;
+  border-bottom: 1px solid #C8B8FF;
+}
+.single-student-and-single-campus summary {
+  background: #C8B8FF;
+  border-bottom: 1px solid #B8C0FF;
+}
+.adding-a-campus-and-adding-a-student summary {
+  background: #B8C0FF;
+  border-bottom: 1px solid #BBD0FF;
+}
+.removing-a-campus-and-removing-a-student summary {
+  background: #BBD0FF;
+  border-bottom: 1px solid #FFD6FF;
+}
+
+.HomePage summary:hover {
+  filter: brightness(0.95);
+}
+
+.HomePage details > ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+
+.HomePage details ul ul {
+  padding-left: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.HomePage details ul ul ul {
+  padding-left: 1.5rem;
+  margin-top: 0.25rem;
+  list-style-type: disc;
+}
