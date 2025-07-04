@@ -7,7 +7,7 @@ import UsersList from "./UsersList";
 import SingleUser from "./SingleUser";
 import AddUser from "./AddUser";
 
-const App = () => {
+const App = () => { 
   return (
     <div>
       <NavBar />
