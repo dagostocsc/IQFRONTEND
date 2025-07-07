@@ -24,11 +24,3 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     }, 2000);
 });
 
-// Particle Background Effect
-particlesJS("particles-js", {
-    particles: {
-        number: { value: 80 },
-        size: { value: 3 },
-        move: { speed: 2 }
-    }
-});

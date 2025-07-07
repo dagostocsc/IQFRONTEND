@@ -1,5 +1,5 @@
 import React from "react";
-import UserCard from "./UserCard";
+import UserCard from "../components/UserCard";
 import { Link } from "react-router-dom";
 
 const UsersList = ({ users = [], fetchAllUsers }) => {

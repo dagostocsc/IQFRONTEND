@@ -1,0 +1,114 @@
+.wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    z-index: 10;
+    position: relative;
+    padding: 1rem;
+    text-align: center;
+}
+
+.signupForm {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    max-width: 350px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signupForm input {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.signupForm input[type="date"] {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+    appearance: none; /* removes some browser-specific styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+h1 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.btn-container {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.btn {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 6px;
+    background-color: #fff;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+.register-link {
+    margin-top: 1rem;
+    color: white;
+}
+
+.register-link a {
+    color: #ddd;
+    text-decoration: underline;
+}
+
+.scrolling-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 2rem;
+}
+
+.scrolling-track {
+    display: flex;
+    animation: scroll 20s linear infinite;
+}
+
+.scrolling-item {
+    flex: 0 0 auto;
+    margin-right: 2rem;
+}
+
+.scrolling-item img {
+    height: 40px;
+    object-fit: contain;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
