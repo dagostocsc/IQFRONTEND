@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const togglePassword = document.querySelector(".toggle-password");
     const passwordField = document.getElementById("password");
@@ -15,54 +18,56 @@ const LoginPage = () => {
 
     const form = document.getElementById("loginForm");
     if (form) {
-      form.addEventListener("submit", (e) => {
-        const username = document.getElementById("username").value;
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
 
-        if (!username || !password) {
-          e.preventDefault();
+        if (!email || !password) {
           alert("Please fill in all fields!");
           return;
         }
 
         document.getElementById("progress-bar").style.width = "100%";
 
-        setTimeout(() => {
-          alert("Login Successful!");
-        }, 2000);
+        try {
+          const res = await fetch("http://localhost:8080/api/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const data = await res.json();
+
+          if (data.token) {
+            localStorage.setItem("token", data.token);
+            alert("Login Successful! Redirecting to profile...");
+            navigate("/profile");
+          } else {
+            alert("Login failed: " + (data.error || "Unknown error"));
+            document.getElementById("progress-bar").style.width = "0%";
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Login request failed.");
+          document.getElementById("progress-bar").style.width = "0%";
+        }
       });
     }
-  }, []);
+  }, [navigate]);
 
   const logos = [
-    { href: "https://www.nasa.gov", img: "NASA LOGO.png", alt: "NASA" },
+    { href: "https://www.nasa.gov", img: "sorry.png", alt: "Gaming Hoodie" },
     { href: "https://www.spacex.com", img: "SPACE X LOGO.png", alt: "SpaceX" },
-    {
-      href: "https://www.astronomy.com",
-      img: "ASTRONOMY MAGAZINE.png",
-      alt: "Astronomy",
-    },
-    {
-      href: "https://astroscale.com",
-      img: "ASTROSCALE.png",
-      alt: "Astroscale",
-    },
-    {
-      href: "https://www.astrobotic.com",
-      img: "ASTROBOTIC TECHNOLOGY LOGO.png",
-      alt: "Astrobotic",
-    },
-    {
-      href: "https://aas.org/news/astronomy-in-the-news",
-      img: "AMERICAN ASTRONOMICAL SOCIETY.png",
-      alt: "AAS",
-    },
+    { href: "https://www.astronomy.com", img: "ASTRONOMY MAGAZINE.png", alt: "Astronomy" },
+    { href: "https://astroscale.com", img: "ASTROSCALE.png", alt: "Astroscale" },
+    { href: "https://www.astrobotic.com", img: "ASTROBOTIC TECHNOLOGY LOGO.png", alt: "Astrobotic" },
+    { href: "https://aas.org/news/astronomy-in-the-news", img: "AMERICAN ASTRONOMICAL SOCIETY.png", alt: "AAS" },
     { href: "https://www.space.com", img: "SPACE NEWS.png", alt: "Space News" },
-    {
-      href: "https://phys.org/space-news/astronomy/",
-      img: "PHYS ORG.png",
-      alt: "Phys Org",
-    },
+    { href: "https://phys.org/space-news/astronomy/", img: "PHYS ORG.png", alt: "Phys Org" },
   ];
 
   return (
@@ -72,16 +77,11 @@ const LoginPage = () => {
           <h1>Login</h1>
 
           <div className="input-box">
-            <input type="text" id="username" placeholder="Username" required />
+            <input type="email" id="email" placeholder="Email" required />
           </div>
 
           <div className="input-box">
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              required
-            />
+            <input type="password" id="password" placeholder="Password" required />
             <i className="toggle-password bx bx-show"></i>
           </div>
 
@@ -105,7 +105,6 @@ const LoginPage = () => {
           </div>
         </form>
 
-        {/* SCROLLING IMAGES */}
         <div className="scrolling-container">
           <div className="scrolling-track">
             {logos.concat(logos).map((item, idx) => (

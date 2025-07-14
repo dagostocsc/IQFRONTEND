@@ -2,22 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Signup.css";
 import { useNavigate } from "react-router-dom";
+
 const SignUp = () => {
   const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-      firstName: "",
-      lastName: "",
-      email: "",
-      address: "",
-      dateOfBirth: "",
-      phoneNumber: "",
-      imageURL: "",
-    });
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+  });
 
-    const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(0);
 
-    const logos = [
+  const logos = [
     { href: "https://www.nasa.gov", img: "NASA LOGO.png", alt: "NASA" },
     { href: "https://www.spacex.com", img: "SPACE X LOGO.png", alt: "SpaceX" },
     { href: "https://www.astronomy.com", img: "ASTRONOMY MAGAZINE.png", alt: "Astronomy" },
@@ -35,27 +34,45 @@ const SignUp = () => {
     }));
   };
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { firstName, lastName, email, address } = formData;
-    if (!firstName || !lastName || !email || !address) {
+    const { firstName, lastName, username, email, password } = formData;
+    if (!firstName || !lastName || !username || !email || !password) {
       alert("Please fill in all required fields!");
       return;
     }
 
-    setProgress(100); // Show full progress bar
+    setProgress(100);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/user", formData); 
-      alert("Sign Up Successful!");
-      navigate("/");
+      await axios.post("http://localhost:8080/api/auth/signup", {
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+      });
+
+      const loginResponse = await axios.post("http://localhost:8080/api/auth/login", {
+        email,
+        password,
+      });
+
+      const { token } = loginResponse.data;
+      if (token) {
+        localStorage.setItem("token", token);
+        alert("Signup & Login successful! Redirecting to profile...");
+        navigate("/profile");
+      } else {
+        alert("Signup succeeded, but login failed.");
+      }
     } catch (error) {
-      alert("Sign Up Failed. Try again.");
       console.error(error);
+      alert("Signup failed. Try again.");
     }
 
-    setProgress(0); // Reset progress bar (optional)
+    setProgress(0);
   };
 
   return (
@@ -69,7 +86,6 @@ const SignUp = () => {
               type="text"
               name="firstName"
               placeholder="First Name"
-              className="input-box"
               value={formData.firstName}
               onChange={handleChange}
               required
@@ -81,8 +97,18 @@ const SignUp = () => {
               type="text"
               name="lastName"
               placeholder="Last Name"
-              className="input-box"
               value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="input-box">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formData.username}
               onChange={handleChange}
               required
             />
@@ -94,7 +120,6 @@ const SignUp = () => {
               name="email"
               placeholder="Email"
               value={formData.email}
-              className="input-box"
               onChange={handleChange}
               required
             />
@@ -102,46 +127,12 @@ const SignUp = () => {
 
           <div className="input-box">
             <input
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={formData.address}
-              className="input-box"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
               onChange={handleChange}
               required
-            />
-          </div>
-
-          <div className="input-box">
-            <input
-              type="date"
-              name="dateOfBirth"
-              className="input-box"
-              placeholder="Date of Birth"
-              value={formData.dateOfBirth}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="input-box">
-            <input
-              type="text"
-              name="phoneNumber"
-              className="input-box"
-              placeholder="Phone Number"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="input-box">
-            <input
-             className="input-box"
-              type="url"
-              name="imageURL"
-              placeholder="Image URL (optional)"
-              value={formData.imageURL}
-              onChange={handleChange}
             />
           </div>
 
