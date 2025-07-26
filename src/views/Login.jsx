@@ -44,6 +44,7 @@ const LoginPage = () => {
 
           if (data.token) {
             localStorage.setItem("token", data.token);
+            localStorage.setItem("role", data.role); // 🟢 Save role
             alert("Login Successful! Redirecting to profile...");
             navigate("/profile");
           } else {
@@ -100,7 +101,13 @@ const LoginPage = () => {
 
           <div className="register-link">
             <p>
-              Don't have an account? <a href="#">Register</a>
+              Don't have an account?{" "}
+              <span
+                onClick={() => navigate("/signup")}
+                style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
+              >
+                Register
+              </span>
             </p>
           </div>
         </form>

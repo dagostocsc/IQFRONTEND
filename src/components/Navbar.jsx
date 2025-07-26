@@ -6,9 +6,11 @@ import Footer from "./Footer";
 const NavBar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role"); // 🟢 get role from storage
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     navigate("/login");
   };
 
@@ -20,6 +22,20 @@ const NavBar = () => {
           <li><Link to="/" className="nav-link">HOME</Link></li>
           <li><Link to="/services" className="nav-link">Services</Link></li>
 
+          {/* MESSAGES */}
+          {token && (
+            <li className="nav-link dropdown">
+              Messages ▾
+              <ul className="dropdown-menu">
+                <li><Link to="/messages/users" className="dropdown-item">Message Users</Link></li>
+                {role === "player" && (
+                  <li><Link to="/messages/admin" className="dropdown-item">Message Admin</Link></li>
+                )}
+              </ul>
+            </li>
+          )}
+
+          {/* ACCOUNT */}
           <li className="nav-link dropdown">
             Account ▾
             <ul className="dropdown-menu">

@@ -9,7 +9,7 @@ import Services from "./views/Services";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import UserProfile from "./views/UserProfile";
-import axios from "axios";
+import Messages from "./views/Messages";      // 👈 ADD THIS
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -23,11 +23,22 @@ const App = () => {
           <Route path="/services" element={<Services />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          
           <Route
             path="/profile"
             element={
               <ProtectedRoute>
                 <UserProfile />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* 👇 ADD THIS ROUTE */}
+          <Route
+            path="/messages"
+            element={
+              <ProtectedRoute>
+                <Messages />
               </ProtectedRoute>
             }
           />
