@@ -6,17 +6,17 @@ const services = [
   {
     name: "Gaming Coaching",
     description: "One-on-one training to improve your gaming skills.",
-    price: "$50/hr",
+    price: "$75/hr",
   },
   {
     name: "Video Editing",
     description: "Professional editing for your game clips or content.",
-    price: "$70/hr",
+    price: "$75/hr",
   },
   {
     name: "Coaching for Video Editing",
     description: "Learn how to edit like a pro with personalized coaching.",
-    price: "$60/hr",
+    price: "$80/hr",
   },
   {
     name: "Marketing Consulting",
@@ -29,7 +29,7 @@ const Services = () => {
   const navigate = useNavigate();
 
   const handleBook = (service) => {
-    navigate("/book", { state: { service } }); // assuming you will have a /book route
+    navigate("/bookplayer", { state: { service } }); // assuming you will have a /book route
   };
 
   return (

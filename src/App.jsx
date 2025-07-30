@@ -9,8 +9,11 @@ import Services from "./views/Services";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import UserProfile from "./views/UserProfile";
-import Messages from "./views/Messages";      // 👈 ADD THIS
+import PlayerProfile from "./views/PlayerProfile";
+import Messages from "./views/Messages";
 import ProtectedRoute from "./components/ProtectedRoute";
+import BookPlayer from "./views/BookPlayer";
+import ServiceCalendar from "./views/ServiceCalendar";
 
 const App = () => {
   return (
@@ -21,9 +24,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/bookplayer" element={<BookPlayer />} />
+          <Route path="/calendar" element={<ServiceCalendar />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          
+
           <Route
             path="/profile"
             element={
@@ -33,7 +38,6 @@ const App = () => {
             }
           />
 
-          {/* 👇 ADD THIS ROUTE */}
           <Route
             path="/messages"
             element={
