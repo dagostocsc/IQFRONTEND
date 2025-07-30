@@ -4,29 +4,45 @@
   justify-content: center;
   gap: 2rem;
   padding: 2rem;
-  margin-top: 80px; /* below navbar */
+  margin-top: 80px;
 }
 
 .service-card {
-  background: rgba(255, 255, 255, 0.1);
+  width: 250px;
+  height: auto;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  width: 250px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
   padding: 1.5rem;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   cursor: pointer;
 }
 
 .service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.2);
+  transform: scale(1.03);
+  background: linear-gradient(135deg, #00f0ff, #ff00c8);
+  box-shadow: 0 8px 20px rgba(255, 0, 200, 0.3);
+}
+
+.service-card:hover .card-body {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.service-card:hover .book-button {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid white;
 }
 
 .service-title {
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;

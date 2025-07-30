@@ -67,10 +67,6 @@ const NavBar = () => {
           <li><span className="nav-link disabled">IQ Entertainment</span></li>
         </ul>
       </div>
-
-      <div>
-        <Footer />
-      </div>
     </nav>
   );
 };
