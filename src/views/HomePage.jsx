@@ -53,16 +53,18 @@ const HomePage = () => {
       comment:
         "Even with no experience, I felt like I could follow along and actually learn. Super beginner friendly.",
     },
+    {
+      name: "Harvey Specter",
+      service: "Marketing Consulting",
+      comment:
+        "They didn’t just give advice, they delivered results. My brand presence feels unstoppable now.",
+    },
   ];
 
   return (
     <>
-      <div className="HomePage">
-        <h1>Join Our Competitive Gaming Hub</h1>
-      </div>
-
       <section className="how-it-works">
-        <h2>Learn from the best players in the world!</h2>
+        <h2>Join Our Competitive Gaming Hub!</h2>
         <div className="steps">
           <div className="step">
             <h3>Train with Top-Tier Talent</h3>

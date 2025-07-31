@@ -1,28 +1,21 @@
-/* Color palette:
-https://coolors.co/palette/ffd6ff-e7c6ff-c8b6ff-b8c0ff-bbd0ff
-FFD6FF
-E7C6FF
-C8B8FF
-B8C0FF
-BBD0FF */
 .reviews {
-  padding: 4rem 2rem;
+  padding: 2rem 2rem 4rem 2rem;
   background: transparent;
-  min-height: 100vh;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-bottom: -190px;
+  margin-top: -2rem;
+  margin-bottom: 4rem;
 }
 
 .reviews h2 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
-  color: white; /* Changed to white */
+  color: white;
 }
 
 .reviews-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   justify-items: center;
 }
@@ -78,7 +71,6 @@ BBD0FF */
   margin-top: 0.5rem;
 }
 
-/* Confetti animation */
 @keyframes explode {
   0% {
     transform: scale(0);
@@ -100,11 +92,10 @@ BBD0FF */
   color: #888;
 }
 
-
 /* How It Works Section */
 .how-it-works {
   padding: 4rem 2rem;
-  background: rgba(255, 255, 255, 0.08); /* semi-transparent */
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-radius: 1rem;
@@ -112,11 +103,10 @@ BBD0FF */
   text-align: center;
   width: 100%;
   max-width: 1000px;
-  margin: 4rem auto;
+  margin: 8rem auto 2rem auto;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
-
 
 .how-it-works h2 {
   font-size: 2.5rem;
@@ -126,7 +116,6 @@ BBD0FF */
   background-clip: text; 
   -webkit-text-fill-color: transparent;
 }
-
 
 .steps {
   display: grid;
@@ -169,17 +158,17 @@ BBD0FF */
 }
 
 .step:nth-child(1) {
-  background-color: #7c1e3f; 
+  background: linear-gradient(135deg, #7c1e3f, #ff6b81);
   color: white;
 }
 
 .step:nth-child(2) {
-  background-color: #164d77; 
+  background: linear-gradient(135deg, #164d77, #00bfff);
   color: white;
 }
 
 .step:nth-child(3) {
-  background-color: #6e2b7e; 
+  background: linear-gradient(135deg, #6e2b7e, #d479ff);
   color: white;
 }
 
@@ -248,7 +237,6 @@ BBD0FF */
   padding-left: 1.5rem;
   margin-top: 0.5rem;
 }
-
 
 .HomePage details ul ul {
   padding-left: 1.5rem;
