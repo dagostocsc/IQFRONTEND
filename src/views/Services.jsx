@@ -1,6 +1,7 @@
 import React from "react";
 import "./Services.css";
 import { useNavigate } from "react-router-dom";
+import VideoBG from "../components/VideoBG"; // ✅ adjust path as needed
 
 const services = [
   {
@@ -29,22 +30,26 @@ const Services = () => {
   const navigate = useNavigate();
 
   const handleBook = (service) => {
-    navigate("/bookplayer", { state: { service } }); // assuming you will have a /book route
+    navigate("/bookplayer", { state: { service } });
   };
 
   return (
-    <div className="services-container">
-      {services.map((service, index) => (
-        <div key={index} className="service-card">
-          <h3 className="service-title">{service.name}</h3>
-          <p className="service-description">{service.description}</p>
-          <p className="service-price">{service.price}</p>
-          <button className="book-now-btn" onClick={() => handleBook(service)}>
-            Book Now
-          </button>
-        </div>
-      ))}
-    </div>
+    <>
+      <VideoBG src="/coding.mp4" />
+
+      <div className="services-container">
+        {services.map((service, index) => (
+          <div key={index} className="service-card">
+            <h3 className="service-title">{service.name}</h3>
+            <p className="service-description">{service.description}</p>
+            <p className="service-price">{service.price}</p>
+            <button className="book-now-btn" onClick={() => handleBook(service)}>
+              Book Now
+            </button>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 
