@@ -7,16 +7,22 @@
   height: 60px;
   z-index: 100;
   padding: 0 1rem;
+  transition: height 0.3s ease;
+}
+
+.navbar:hover {
+  height: 85px;
 }
 
 .navbar-container {
   display: flex;
-  justify-content: flex-start; /* align everything to the left */
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 1rem; /* optional spacing between logo and links */
+  gap: 1rem;
+  transition: padding 0.3s ease;
 }
 
 .logo {
@@ -25,6 +31,11 @@
   width: auto;
   display: block;
   object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.navbar:hover .logo {
+  transform: scale(1.1);
 }
 
 .navbar-nav {
@@ -43,6 +54,11 @@
   font-family: fantasy;
   font-size: 0.9rem;
   line-height: 60px;
+  transition: line-height 0.3s ease;
+}
+
+.navbar:hover .nav-link {
+  line-height: 85px;
 }
 
 .nav-link:hover {
