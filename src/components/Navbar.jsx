@@ -58,7 +58,7 @@ const NavBar = () => {
               ) : (
                 <>
                   <li><Link to="/profile" className="dropdown-item">Profile</Link></li>
-                  <li><Link to="/edit-profile" className="dropdown-item">Edit Profile</Link></li>
+                  <li><Link to="/editprofile" className="dropdown-item">Edit Profile</Link></li>
                   <li><Link to="/manage-bookings" className="dropdown-item">Manage Bookings</Link></li>
                   <li><Link to="/manage-services" className="dropdown-item">Manage Services</Link></li>
                   <li>

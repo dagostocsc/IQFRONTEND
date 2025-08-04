@@ -14,7 +14,7 @@ import Messages from "./views/Messages";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BookPlayer from "./views/BookPlayer";
 import ServiceCalendar from "./views/ServiceCalendar";
-// import Events from "./views/Events";
+import EditUserProfile from "./views/EditUserProfile";
 
 const App = () => {
   return (
@@ -29,7 +29,7 @@ const App = () => {
           <Route path="/calendar" element={<ServiceCalendar />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          {/* <Route path="/events" element={<Events />} /> */}
+          <Route path="/editprofile" element={<EditUserProfile />} />
 
           <Route
             path="/profile"

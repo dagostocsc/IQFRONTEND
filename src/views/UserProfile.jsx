@@ -2,17 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./UserProfile.css";
-import VideoBG from "../components/VideoBG"; // ✅ adjust path as needed
+import VideoBG from "../components/VideoBG";
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [presence, setPresence] = useState("online");
-  const [bio, setBio] = useState("");
-  const [tags, setTags] = useState([]);
-  const [imagePreview, setImagePreview] = useState(null);
   const navigate = useNavigate();
 
-  // ✅ Check for login and fetch profile data
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -26,8 +22,6 @@ const UserProfile = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data);
-        setBio(res.data.bio || "");
-        setTags(res.data.tags || []);
       } catch (err) {
         console.error(err);
         alert("Failed to load profile. Please log in again.");
@@ -38,18 +32,10 @@ const UserProfile = () => {
     fetchProfile();
   }, [navigate]);
 
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
-
   if (!user) return <p>Loading profile...</p>;
 
   return (
     <>
-      {/* ✅ Add Video Background */}
       <VideoBG src="/heavysmoke.mp4" />
 
       <div className="profile-page">
@@ -57,7 +43,6 @@ const UserProfile = () => {
           <div className="avatar-wrapper">
             <img
               src={
-                imagePreview ||
                 user.imageURL ||
                 "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
               }
@@ -65,7 +50,6 @@ const UserProfile = () => {
               className="profile-img"
             />
             <span className={`status-dot ${presence}`} />
-            <input type="file" accept="image/*" onChange={handleAvatarChange} />
           </div>
 
           <h1>{user.firstName} {user.lastName}</h1>
@@ -82,30 +66,18 @@ const UserProfile = () => {
 
           <div className="about-section">
             <h3>About Me</h3>
-            <textarea
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              placeholder="Write a short bio..."
-            />
-            <input
-              type="text"
-              placeholder="Enter tags like Fortnite, Editing..."
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  setTags([...tags, e.target.value]);
-                  e.target.value = "";
-                }
-              }}
-            />
+            <p>{user.bio || "No bio provided."}</p>
             <div className="tags">
-              {tags.map((tag, i) => (
-                <span key={i} className="tag">{tag}</span>
-              ))}
+              {user.tags && user.tags.length > 0 ? (
+                user.tags.map((tag, i) => <span key={i} className="tag">{tag}</span>)
+              ) : (
+                <p>No tags provided.</p>
+              )}
             </div>
           </div>
 
           <div className="profile-actions">
-            <button>Edit Profile</button>
+            <button onClick={() => navigate("/edit-profile")}>Edit Profile</button>
             <button>Switch Accounts</button>
             <button onClick={() => navigator.clipboard.writeText(user.id)}>Copy ID</button>
           </div>
