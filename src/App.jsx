@@ -1,5 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Navbar from "./components/Navbar";
 import VideoBG from "./components/VideoBG";
 import HomePage from "./views/HomePage";
@@ -13,7 +16,6 @@ import PlayerProfile from "./views/PlayerProfile";
 import Messages from "./views/Messages";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BookPlayer from "./views/BookPlayer";
-import ServiceCalendar from "./views/ServiceCalendar";
 import EditUserProfile from "./views/EditUserProfile";
 
 const App = () => {
@@ -25,8 +27,16 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/bookplayer" element={<BookPlayer />} />
-          <Route path="/calendar" element={<ServiceCalendar />} />
+
+          <Route
+            path="/bookplayer"
+            element={
+              <ProtectedRoute>
+                <BookPlayer />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/editprofile" element={<EditUserProfile />} />
@@ -48,9 +58,20 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+
+          {/* <Route path="/player/:id" element={<PlayerProfile />} /> */}
         </Routes>
         <Footer />
       </main>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={1600}
+        pauseOnFocusLoss={false}
+        newestOnTop
+        theme="dark"
+        closeOnClick
+      />
     </>
   );
 };

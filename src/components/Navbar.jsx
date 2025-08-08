@@ -21,7 +21,6 @@ const NavBar = () => {
         <ul className="navbar-nav">
           <li><Link to="/" className="nav-link">HOME</Link></li>
           <li><Link to="/services" className="nav-link">Services</Link></li>
-          <li><Link to="/events" className="nav-link">Events</Link></li>
 
           {/* SHOP */}
           <li className="nav-link dropdown">

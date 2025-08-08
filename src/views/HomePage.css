@@ -158,17 +158,17 @@
 }
 
 .step:nth-child(1) {
-  background: linear-gradient(135deg, #7c1e3f, #ff6b81);
+  background: linear-gradient(135deg, #385edc, #ff6b81);
   color: white;
 }
 
 .step:nth-child(2) {
-  background: linear-gradient(135deg, #164d77, #00bfff);
+  background: linear-gradient(135deg, #164d77, #c031d3);
   color: white;
 }
 
 .step:nth-child(3) {
-  background: linear-gradient(135deg, #6e2b7e, #d479ff);
+  background: linear-gradient(135deg, #47aa6d, #6d23dd);
   color: white;
 }
 

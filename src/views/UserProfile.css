@@ -1,6 +1,6 @@
 .profile-page {
   width: 100vw;
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -9,14 +9,10 @@
   padding: 4rem 0;
 }
 
-
 .profile-card {
-  position: fixed;
-  min-height: 100vh;
-  top: 0;
-  left: 0;
+  position: relative;
+  min-height: auto;
   width: 100vw;
-  height: 100vh;
   padding: 4rem 2rem;
   background: rgba(0, 0, 0, 0.7);
   color: white;
@@ -27,6 +23,7 @@
   border-radius: 0;
   margin: 0;
 }
+
 
 .profile-left {
   flex: 1;

@@ -88,3 +88,31 @@ h1 {
         transform: translateX(-50%);
     }
 }
+
+.neon-toast {
+  background: rgba(0, 0, 0, 0.85) !important;
+  color: #b966ff !important; /* Violet Purple */
+  font-weight: bold;
+  text-shadow: 0 0 5px #b966ff, 0 0 10px #b966ff, 0 0 20px #b966ff;
+  border: 2px solid #b966ff !important;
+  box-shadow: 0 0 10px #b966ff, 0 0 20px #ff00ff inset;
+  border-radius: 12px !important;
+}
+
+.neon-toast .Toastify__progress-bar {
+  background: linear-gradient(90deg, #b966ff, #ff00ff, #b966ff) !important;
+  box-shadow: 0 0 5px #b966ff, 0 0 10px #ff00ff;
+}
+
+.neon-toast.neon-error {
+  color: #ff4d4d !important;
+  border-color: #ff4d4d !important;
+  text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+}
+
+.neon-toast.neon-warn {
+  color: #ffff66 !important;
+  border-color: #ffff66 !important;
+  text-shadow: 0 0 5px #ffff66, 0 0 10px #ffff66, 0 0 20px #ffff66;
+}
+

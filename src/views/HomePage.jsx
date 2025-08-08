@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./HomePage.css";
 
 const HomePage = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [active, setActive] = useState(false);
+  const overlayRef = useRef(null);
 
   const reviewsData = [
     {
@@ -61,26 +63,56 @@ const HomePage = () => {
     },
   ];
 
+  useEffect(() => {
+    const onScroll = () => {
+      if (!overlayRef.current) return;
+      const rect = overlayRef.current.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        setActive(true);
+      } else {
+        setActive(false);
+      }
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
-      <section className="how-it-works">
-        <h2>Join Our Competitive Gaming Hub!</h2>
-        <div className="steps">
-          <div className="step">
-            <h3>Train with Top-Tier Talent</h3>
-            <p>Set up a question and add your options.</p>
+      {/* Split Layout */}
+      <section className="split-container">
+        {/* Left Side */}
+        <div className="split-left">
+          <div className="how-it-works">
+            <h2>Join Our Competitive Gaming Hub!</h2>
+            <h2>Access exclusive coaching, tournaments, and community events.</h2>
           </div>
-          <div className="step">
-            <h3>Level Up with the Best in the Game</h3>
-            <p>Send your poll via link or embed it anywhere.</p>
+          <div className="steps">
+            <div className="step">
+              <h3>Train with Top-Tier Talent</h3>
+              <p>Set up a question and add your options.</p>
+            </div>
+            <div className="step">
+              <h3>Level Up with the Best in the Game</h3>
+              <p>Send your poll via link or embed it anywhere.</p>
+            </div>
+            <div className="step">
+              <h3>Master Your Skills with Elite Players</h3>
+              <p>Watch the votes roll in and make the best choice.</p>
+            </div>
           </div>
-          <div className="step">
-            <h3>Master Your Skills with Elite Players</h3>
-            <p>Watch the votes roll in and make the best choice.</p>
-          </div>
+        </div>
+
+        {/* Right Side */}
+        <div className="split-right">
+          <div
+            ref={overlayRef}
+            className={`right-overlay ${active ? "active" : ""}`}
+          ></div>
         </div>
       </section>
 
+      {/* Reviews Section */}
       <section className="reviews">
         <h2>User Reviews</h2>
         <div className="reviews-container">
