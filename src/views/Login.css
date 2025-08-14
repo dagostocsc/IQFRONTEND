@@ -58,40 +58,53 @@ h1 {
     margin-bottom: 1rem;
 }
 
+/* ===== Marquee styles (same effect as HomePage) ===== */
 .scrolling-container {
     width: 100%;
     overflow: hidden;
     position: relative;
     margin-top: 2rem;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
 .scrolling-track {
     display: flex;
-    animation: scroll 20s linear infinite;
+    align-items: center;
+    gap: 48px;
+    width: max-content;
+    animation: scroll 28s linear infinite;
 }
 
 .scrolling-item {
     flex: 0 0 auto;
-    margin-right: 2rem;
+    height: 300px; /* fixed height like HomePage tees */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .scrolling-item img {
-    height: 40px;
+    height: 300px !important; /* override old 40px */
+    width: auto;
     object-fit: contain;
+    filter: grayscale(100%) opacity(0.9);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.scrolling-item img:hover {
+    transform: translateY(-2px) scale(1.03);
+    filter: none;
 }
 
 @keyframes scroll {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
 }
 
 .neon-toast {
   background: rgba(0, 0, 0, 0.85) !important;
-  color: #b966ff !important; /* Violet Purple */
+  color: #b966ff !important;
   font-weight: bold;
   text-shadow: 0 0 5px #b966ff, 0 0 10px #b966ff, 0 0 20px #b966ff;
   border: 2px solid #b966ff !important;
@@ -115,4 +128,3 @@ h1 {
   border-color: #ffff66 !important;
   text-shadow: 0 0 5px #ffff66, 0 0 10px #ffff66, 0 0 20px #ffff66;
 }
-

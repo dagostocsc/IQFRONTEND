@@ -1,0 +1,24 @@
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centers horizontally */
+  gap: 10px;
+  margin: 10px auto 0; /* center block container if needed */
+}
+
+.social-link img {
+  width: 48px; /* bigger icons */
+  height: 48px;
+  border-radius: 4px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.social-link img:hover {
+  transform: scale(1.15);
+  box-shadow:
+    0 0 6px rgba(81, 126, 223, 0.8),  /* blue inner glow */
+    0 0 12px rgba(183, 35, 148, 0.7), /* pink middle glow */
+    0 0 20px rgba(255, 93, 135, 0.6); /* magenta outer glow */
+  filter: brightness(1.15) saturate(1.3);
+}
+

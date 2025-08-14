@@ -1,3 +1,4 @@
+// src/views/PlayerSignup.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +8,13 @@ import "./Signup.css";
 
 const API_ORIGIN = import.meta.env.VITE_API_ORIGIN || "http://localhost:8080";
 
-export default function SignUp() {
+
+const ADMIN_CREATE_USER_ENDPOINT = `${API_ORIGIN}/api/admin/users`;   
+const ADMIN_CREATE_PLAYER_ENDPOINT = `${API_ORIGIN}/api/admin/players`;
+
+const NEXT_PATH = "/admin/players";
+
+export default function PlayerSignup() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -16,6 +23,7 @@ export default function SignUp() {
     username: "",
     email: "",
     password: "",
+    gamerTag: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -45,9 +53,10 @@ export default function SignUp() {
     const username  = form.username.trim();
     const email     = form.email.trim();
     const password  = form.password;
+    const gamerTag  = form.gamerTag.trim();
 
-    if (!firstName || !lastName || !username || !email || !password) {
-      toast.warn("⚠ Fill out every field.", {
+    if (!firstName || !lastName || !username || !email || !password || !gamerTag) {
+      toast.warn("⚠ Fill out every field (including Gamer Tag).", {
         className: "neon-toast neon-warn",
         icon: "⚠",
         autoClose: 2000,
@@ -65,43 +74,87 @@ export default function SignUp() {
 
     try {
       setLoading(true);
-      setProgress(35);
+      setProgress(30);
 
-      // Create account
-      await axios.post(`${API_ORIGIN}/api/auth/signup`, {
-        firstName, lastName, username, email, password,
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("Admin auth required.");
+
+      // 1) Create the USER with role=player
+      const userPayload = {
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+        role: "player",
+      };
+
+      const userRes = await axios.post(ADMIN_CREATE_USER_ENDPOINT, userPayload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       });
 
       setProgress(65);
 
-      // Auto-login
-      const res = await axios.post(`${API_ORIGIN}/api/auth/login`, { email, password });
-      setProgress(85);
+      // Try common shapes to get created userId
+      const createdUser =
+        userRes?.data?.user || userRes?.data || {};
+      const userId =
+        createdUser.id ?? createdUser.userId ?? createdUser.user?.id;
 
-      const { token, role } = res.data || {};
-      if (!token) throw new Error("Signup succeeded, but login returned no token.");
+      if (!userId) throw new Error("User created, but no userId returned.");
 
-      localStorage.setItem("token", token);
-      if (role) localStorage.setItem("role", role);
+      // 2) Create the PLAYER linked to that user
+      const playerPayload = {
+        userId,
+        firstName,
+        lastName,
+        gamerTag,
+        email,
+      };
+
+      const playerRes = await axios.post(ADMIN_CREATE_PLAYER_ENDPOINT, playerPayload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
       setProgress(100);
-      toast.success("🚀 Account created. You’re in!", {
+
+      const createdTag =
+        playerRes?.data?.gamerTag || playerRes?.data?.player?.gamerTag || gamerTag;
+
+      toast.success(`🏆 Welcome, ${createdTag}!`, {
         className: "neon-toast",
-        icon: "🎉",
+        icon: "🎮",
         autoClose: 1800,
       });
 
-      navigate("/profile", { replace: true });
+      // Reset form
+      setForm({
+        firstName: "",
+        lastName: "",
+        username: "",
+        email: "",
+        password: "",
+        gamerTag: "",
+      });
+
+      // Send admin to players list (adjust NEXT_PATH if you have a detail route)
+      navigate(NEXT_PATH, { replace: true });
     } catch (err) {
       const msg =
         err?.response?.data?.error ||
         err?.response?.data?.message ||
         err?.message ||
-        "Signup failed.";
+        "Create player failed.";
       toast.error(msg, {
         className: "neon-toast neon-error",
         icon: "❌",
-        autoClose: 2400,
+        autoClose: 2600,
       });
       setProgress(0);
     } finally {
@@ -113,7 +166,7 @@ export default function SignUp() {
     <div className="login-page">
       <div className="wrapper">
         <form className="signupForm" onSubmit={handleSubmit} noValidate>
-          <h1>Sign Up</h1>
+          <h1>Add Player</h1>
 
           <div className="input-box">
             <input
@@ -167,7 +220,7 @@ export default function SignUp() {
             <input
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="Temporary Password"
               value={form.password}
               onChange={onChange}
               autoComplete="new-password"
@@ -176,25 +229,36 @@ export default function SignUp() {
             />
           </div>
 
-          {/* match login ids so styling is identical */}
+          {/* Additional field for players */}
+          <div className="input-box">
+            <input
+              type="text"
+              name="gamerTag"
+              placeholder="Gamer Tag"
+              value={form.gamerTag}
+              onChange={onChange}
+              required
+            />
+          </div>
+
           <div id="progress-wrap" aria-hidden={progress === 0}>
             <div id="progress-bar" style={{ width: `${progress}%` }} />
           </div>
 
           <div className="btn-container">
             <button className="btn" type="submit" disabled={loading}>
-              {loading ? "Creating..." : "Sign Up"}
+              {loading ? "Creating..." : "Add Player"}
             </button>
           </div>
 
           <div className="register-link">
             <p>
-              Already have an account?{" "}
+              Back to players list?{" "}
               <span
-                onClick={() => navigate("/login")}
+                onClick={() => navigate(NEXT_PATH)}
                 style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
               >
-                Login
+                Manage Players
               </span>
             </p>
           </div>

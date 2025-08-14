@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
+const API_ORIGIN = import.meta.env?.VITE_API_ORIGIN || "http://localhost:8080";
+
 const LoginPage = () => {
   const navigate = useNavigate();
 
@@ -13,14 +15,14 @@ const LoginPage = () => {
   const [progress, setProgress] = useState(0);
 
   const logos = [
-    { href: "https://www.nasa.gov", img: "sorry.png", alt: "Gaming Hoodie" },
-    { href: "https://www.spacex.com", img: "SPACE X LOGO.png", alt: "SpaceX" },
-    { href: "https://www.astronomy.com", img: "ASTRONOMY MAGAZINE.png", alt: "Astronomy" },
-    { href: "https://astroscale.com", img: "ASTROSCALE.png", alt: "Astroscale" },
-    { href: "https://www.astrobotic.com", img: "ASTROBOTIC TECHNOLOGY LOGO.png", alt: "Astrobotic" },
-    { href: "https://aas.org/news/astronomy-in-the-news", img: "AMERICAN ASTRONOMICAL SOCIETY.png", alt: "AAS" },
-    { href: "https://www.space.com", img: "SPACE NEWS.png", alt: "Space News" },
-    { href: "https://phys.org/space-news/astronomy/", img: "PHYS ORG.png", alt: "Phys Org" },
+    { href: "https://www.nasa.gov", img: "/femalehoodie.png", alt: "NASA" },
+    { href: "https://www.spacex.com", img: "/sorry.png", alt: "SpaceX" },
+    { href: "https://www.astronomy.com", img: "femalehoodie.png", alt: "Astronomy" },
+    { href: "https://astroscale.com", img: "/sorry.png", alt: "Astroscale" },
+    { href: "https://www.astrobotic.com", img: "femalehoodie.png", alt: "Astrobotic" },
+    { href: "https://aas.org/news/astronomy-in-the-news", img: "/sorry.png", alt: "AAS" },
+    { href: "https://www.space.com", img: "femalehoodie.png", alt: "Space News" },
+    { href: "https://phys.org/space-news/astronomy/", img: "/sorry.png", alt: "Phys Org" },
   ];
 
   const onChange = (e) => {
@@ -47,29 +49,52 @@ const LoginPage = () => {
       setLoading(true);
       setProgress(40);
 
-      const res = await fetch("http://localhost:8080/api/auth/login", {
+      const res = await fetch(`${API_ORIGIN}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
       setProgress(75);
-      const data = await res.json();
+
+      // Handle both JSON and text error bodies
+      let data;
+      const ctype = res.headers.get("content-type") || "";
+      if (ctype.includes("application/json")) {
+        data = await res.json();
+      } else {
+        const text = await res.text();
+        data = { error: text };
+      }
 
       if (!res.ok) throw new Error(data?.error || "Login failed");
       if (!data?.token) throw new Error("Missing token in response.");
 
+      // Persist minimal auth basics (UI only; server enforces real auth)
       localStorage.setItem("token", data.token);
       if (data.role) localStorage.setItem("role", data.role);
+      if (data?.user?.id) localStorage.setItem("userId", String(data.user.id));
+
+      const username =
+        data?.user?.username || data?.username || email.split("@")[0];
+      localStorage.setItem("username", username);
+
+      const roleLower = (data.role || "").toLowerCase();
+      const msg =
+        roleLower === "player"
+          ? `🏆 Welcome, player ${username}!`
+          : `🚀 Welcome back, ${username}!`;
 
       setProgress(100);
-      toast.success("🎮 Welcome back, gamer!", {
+      toast.success(msg, {
         className: "neon-toast",
-        icon: "🚀",
+        icon: roleLower === "player" ? "🎮" : "✨",
         autoClose: 1800,
       });
 
-      navigate("/profile", { replace: true });
+      // ✅ Everyone now lands on /profile (matches navbar + router)
+      const nextPath = "/profile";
+      navigate(nextPath, { replace: true });
     } catch (err) {
       console.error(err);
       toast.error(err.message || "Login request failed.", {
@@ -147,11 +172,7 @@ const LoginPage = () => {
               Don&apos;t have an account?{" "}
               <span
                 onClick={() => navigate("/signup")}
-                style={{
-                  color: "blue",
-                  textDecoration: "underline",
-                  cursor: "pointer",
-                }}
+                style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
               >
                 Register
               </span>

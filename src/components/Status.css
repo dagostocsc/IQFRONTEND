@@ -1,0 +1,73 @@
+.status-select {
+  position: relative;
+  display: inline-block;
+  font-family: inherit;
+}
+
+.status-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.35);
+  cursor: pointer;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.status-trigger .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.status-trigger .chev {
+  font-size: .8rem;
+  margin-left: 4px;
+  opacity: .9;
+}
+
+.status-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 50;
+}
+
+.status-select .status-opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.35);
+  cursor: pointer;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.status-select .status-opt .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.status-select .status-opt.selected {
+  border-color: rgba(255,255,255,.6);
+}
+
+.status-select .status-opt:hover {
+  background: #0f0f0f !important;
+}

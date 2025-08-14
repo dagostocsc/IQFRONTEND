@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import Footer from "./Footer";
 
-const NavBar = () => {
+const PlayerNavBar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
@@ -81,4 +81,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default PlayerNavBar;
