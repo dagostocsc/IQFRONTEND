@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // ⬅️ add Link
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
@@ -57,7 +57,6 @@ const LoginPage = () => {
 
       setProgress(75);
 
-      // Handle both JSON and text error bodies
       let data;
       const ctype = res.headers.get("content-type") || "";
       if (ctype.includes("application/json")) {
@@ -70,7 +69,6 @@ const LoginPage = () => {
       if (!res.ok) throw new Error(data?.error || "Login failed");
       if (!data?.token) throw new Error("Missing token in response.");
 
-      // Persist minimal auth basics (UI only; server enforces real auth)
       localStorage.setItem("token", data.token);
       if (data.role) localStorage.setItem("role", data.role);
       if (data?.user?.id) localStorage.setItem("userId", String(data.user.id));
@@ -92,9 +90,7 @@ const LoginPage = () => {
         autoClose: 1800,
       });
 
-      // ✅ Everyone now lands on /profile (matches navbar + router)
-      const nextPath = "/profile";
-      navigate(nextPath, { replace: true });
+      navigate("/profile", { replace: true });
     } catch (err) {
       console.error(err);
       toast.error(err.message || "Login request failed.", {
@@ -154,7 +150,8 @@ const LoginPage = () => {
             <label>
               <input type="checkbox" /> Remember me
             </label>
-            <a href="#">Forgot Password</a>
+            {/* ⬇️ SPA navigation to reset flow */}
+            <Link to="/forgot-password">Forgot Password</Link>
           </div>
 
           <div id="progress-wrap" aria-hidden={progress === 0}>

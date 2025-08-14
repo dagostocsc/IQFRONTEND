@@ -11,14 +11,16 @@ import Services from "./views/Services";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import UserProfile from "./views/UserProfile";
-import AdminProfile from "./views/AdminProfile"; // NEW
+import AdminProfile from "./views/AdminProfile";
 import Messages from "./views/Messages";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BookPlayer from "./views/BookPlayer";
 import EditUserProfile from "./views/EditUserProfile";
 import PlayerSignup from "./views/PlayerSignUp";
 
-// Client-side guard (UI only). Real enforcement is on the server.
+import ForgotPassword from "./views/ForgotPassword";
+import ResetPassword from "./views/ResetPassword";
+
 const AdminOnly = ({ children }) => {
   const role = (localStorage.getItem("role") || "").toLowerCase();
   return role === "admin" ? children : <Navigate to="/login" replace />;
@@ -47,6 +49,10 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/editprofile" element={<EditUserProfile />} />
 
+
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+
           {/* User profile */}
           <Route
             path="/profile"
@@ -57,8 +63,10 @@ const App = () => {
             }
           />
 
-          {/* Legacy player route redirects to /profile */}
-          <Route path="/player/profile" element={<Navigate to="/profile" replace />} />
+          <Route
+            path="/player/profile"
+            element={<Navigate to="/profile" replace />}
+          />
 
           {/* Admin profile (separate page) */}
           <Route
@@ -72,7 +80,6 @@ const App = () => {
             }
           />
 
-          {/* Admin creates a new player */}
           <Route
             path="/admin/players/new"
             element={
@@ -93,6 +100,7 @@ const App = () => {
             }
           />
         </Routes>
+
         <Footer />
       </main>
 
